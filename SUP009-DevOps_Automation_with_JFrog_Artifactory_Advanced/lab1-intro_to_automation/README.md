@@ -132,6 +132,9 @@ powershell "Start-Process -Wait -Verb RunAs powershell '-NoProfile iwr https://r
 ```
 Let's setup JFrogCLI to integrate with our Artifactory instance. Add the access profile using the [Adding Server Configuration document here](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI#JFrogCLI-AddingandEditingConfiguredServers)
 
+You can also install via CHOCOLATEY
+	
+
 We are going to turn off the interactive prompts and progress bar by setting the environemnt variable CI as true. To verify if the JFrogCLI is successfully able to connect to the platform, we are performing a quick health check [Verifying Artifactory is accessible](https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory#CLIforJFrogArtifactory-VerifyingArtifactoryisAccessible)
 
 ```bash
