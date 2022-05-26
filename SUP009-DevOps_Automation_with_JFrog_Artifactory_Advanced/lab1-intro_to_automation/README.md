@@ -133,7 +133,34 @@ powershell "Start-Process -Wait -Verb RunAs powershell '-NoProfile iwr https://r
 Let's setup JFrogCLI to integrate with our Artifactory instance. Add the access profile using the [Adding Server Configuration document here](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI#JFrogCLI-AddingandEditingConfiguredServers)
 
 You can also install via CHOCOLATEY
-	
+```bash
+#Install using choco as mentioned in https://jfrog.com/getcli/
+choco install jfrog-cli-v2-jf
+
+# In Windows PowerShell
+
+# admin user
+$env:ARTIFACTORY_LOGIN="your username"
+
+# admin password
+$env:ARTIFACTORY_PASSWORD="your password"
+
+#Please generate API KEY and enter it below
+$env:ARTIFACTORY_API_KEY="your api key"
+
+# Service admin token
+$env:token="your access token"
+
+$env:ARTIFACTORY_ACCESS_TOKEN="your access token"
+
+$env:ARTIFACTORY_HOSTNAME="your artifactory sever fqdn"
+
+
+# check using:
+dir env:
+```
+
+
 
 We are going to turn off the interactive prompts and progress bar by setting the environemnt variable CI as true. To verify if the JFrogCLI is successfully able to connect to the platform, we are performing a quick health check [Verifying Artifactory is accessible](https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory#CLIforJFrogArtifactory-VerifyingArtifactoryisAccessible)
 
@@ -144,3 +171,12 @@ jf config show
 jf c use ${ARTIFACTORY_HOSTNAME}
 jf rt ping
 ```
+Similar steps using Powershell
+```bash	
+$env:CI=true 
+jf c rm $env:ARTIFACTORY_HOSTNAME
+jf c add $env:ARTIFACTORY_HOSTNAME --url "https://$env:ARTIFACTORY_HOSTNAME" --access-token $env:ARTIFACTORY_ACCESS_TOKEN
+jf config show
+jf c use $env:ARTIFACTORY_HOSTNAME
+jf rt ping
+```	
